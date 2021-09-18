@@ -31,11 +31,34 @@ sudo mkdir -p ~/.local/share/NordManager/
 sudo cp app/data.json ~/.local/share/NordManager/
 sudo cp app/default_data.json ~/.local/share/NordManager/
 
-
 # =============== RIGHTS
 sudo chmod -R 755 ~/.local/share/NordManager
 sudo chown -R $USER ~/.local/share/NordManager
 
-echo "Installation completed, please read the readme file to know more"
+# =============== SERVICE
+
+mkdir -p $HOME/.config/systemd/user
+# cp app/nordmanager.service $HOME/.config/systemd/user
+cat app/nordmanager.service | envsubst > $HOME/.config/systemd/user/nordmanager.service
+sudo systemctl enable $HOME/.config/systemd/user/nordmanager.service
+sudo systemctl start nordmanager.service
+
+echo
+echo
+echo "Installation completed."
+echo
+echo "Nord Manager will be started on boot."
+echo "If you don't want to run it on startup, run the command:"
+echo "  sudo systemctl disable nordmanager.service"
+echo 
+echo "You can then start it manually by"
+echo "  1. Opening the program menu by pressing the Super (aka Windows) key"
+echo "  2. Typing Nord Manager to search for the program"
+echo "  3. Clicking on the Nord Manager icon"
+echo
+echo "You can start it on the command line by running:"
+echo "  nordmanager.sh"
+echo
+echo "Please read the readme file to know more."
 
 

@@ -1,0 +1,14 @@
+[Unit]
+Description=Launches a manager for NordVPN in a system tray icon
+After=multi-user.target
+ 
+[Service]
+Type=simple
+User=${USER}
+Environment="DISPLAY=:0"
+Environment="XAUTHORITY=/home/${USER}/.Xauthority"
+ExecStart=/usr/bin/nordmanager.sh
+Restart=on-failure
+ 
+[Install]
+WantedBy=multi-user.target
